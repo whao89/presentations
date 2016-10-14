@@ -1,0 +1,218 @@
+\documentclass[serif,14pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{pifont}
+\usepackage{xfrac}
+\usepackage{multirow,bigdelim}
+\usepackage{datetime}
+\usepackage{tikz}
+\usepackage[caption=false]{subfig}
+
+
+\usepackage{ulem}
+
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=left}
+%\setbeamertemplate{note page}[plain]
+
+\usepackage{mathtools} %for underbraces
+
+\yyyymmdddate
+
+\newcommand{\E}{\mathrm{E}}
+
+\mode<presentation>
+{ \usetheme{Frankfurt} 
+  \usecolortheme{seagull} }
+\usepackage{graphicx}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+
+\setbeamertemplate{section page}
+{
+    \begin{centering}
+    \begin{beamercolorbox}[sep=12pt,center,rounded=true,shadow=false]{part title}
+    \usebeamerfont{section title}\sc\insertsection\par
+    \end{beamercolorbox}
+    \end{centering}
+}
+
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+
+
+\title{ Scaling models of genetic variation to millions of humans }
+\author{ Wei Hao \\ {\footnotesize Lewis-Sigler Institute for Integrative Genomics}}
+\date{\today}
+
+% mention John STorey
+% mention that I'm LSI
+% mention he's CSML
+% mention collab w blei et al
+
+% reduce bio intro to 5min fewer slides
+
+\begin{document}
+
+\setlength{\parskip}{8pt}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+
+[DNA PICTURE]
+
+genetic information is encoded in DNA; humans share 99+ percent of DNA; yet humans exhibit a great variety of complex traits; for example, height or disease suspectability.
+\end{frame}
+
+\begin{frame}
+Single Nucleotide Polymorphism (SNP):
+
+[SNP PICTURE]
+
+genetic variation is key; most common type of genetic variation is a SNP; SNPs are where a single base pair in DNA seq differs; 
+\end{frame}
+
+\begin{frame}
+
+[INHERITANCE PICTURE]
+
+genetic variants are passed from parents to offspring; you have a version of each chromosome from each of your parents;
+\end{frame}
+
+\begin{frame}
+
+[GLOBE PICTURE]
+
+thus, genetic variation is affected by migration; and the general course of human history
+\end{frame}
+
+\begin{frame}
+
+[DARWIN PICTURE OR DAVID STERN BLACK SCREEN?]
+
+as well as evolutionary forces such as selection
+\end{frame}
+
+\begin{frame}
+
+[DAVID STERN BLACK SCREEN?]
+
+thus, modeling genome wide variation is important step in understanding the role that genetics plays.
+\end{frame}
+
+\begin{frame}
+
+[SNPS PICTURE]
+
+describe data, 0's 1's and 2's; two dimensions- samples and locations in genome; give example of scale; discuss how this is a opportunity to model dependence b/w indivs due to high-dimensionality
+\end{frame}
+
+\begin{frame}
+
+[ANCESTRAL POPULATIONS PICTURE]
+
+start describing model; show ancestral poops using solid color bars
+\end{frame}
+
+\begin{frame}
+
+[ANCESTRAL POPULATIONS PICTURE 2]
+
+show individuals as linear combinations (admixture) of color bars
+\end{frame}
+
+\begin{frame}
+
+[MARKER PICTURE]
+
+at each variant, ancestral populations have an associated frequency for how common this variant is; bc each individuals genome is composed of contributions from each ancestral pop
+\end{frame}
+
+\begin{frame}
+
+MATH/MATRIX SLIDE
+
+this setup lends itself easily to a Bayesian model; 
+\end{frame}
+
+\begin{frame}
+
+[ROSENBERG 2002 FIGURE]
+
+end result looks like this; posterior for the admixture proportions; global dataset; scale
+\end{frame}
+
+\begin{frame}
+
+[PSD CITATIONS FIGURE]
+
+this admixture model is wildly popular in population genomics; discuss PSD citations; discuss similarities to LDA for NLP problems
+\end{frame}
+
+\begin{frame}
+
+[PAPER TITLES FIGURE]
+
+many different ways to infer: structure model, admixture, faststructure; describe each
+\end{frame}
+
+\begin{frame}
+
+[NEXT GEN DATA PAPER FIGURES]
+
+fundamental weakness is these methods are not scalable- show 23andme, GWAS, TGP p3 papers
+\end{frame}
+
+\begin{frame}
+
+[????]
+
+discuss that we'll use SVI to fit this model
+\end{frame}
+
+\begin{frame}
+
+[TS SCHEMATIC]
+
+discuss TS algo; discuss sampling; discuss local v global
+\end{frame}
+
+\begin{frame}
+
+[SIMULATION FIGURE]
+
+we can beat everyone else up to millions
+\end{frame}
+
+
+\begin{frame}
+
+[????]
+
+some sort of closing?
+\end{frame}
+
+\begin{frame}
+Thanks co-authors
+\end{frame}
+
+\begin{frame}
+Software: \url{https://github.com/premgopalan/terastructure}
+
+Funding:
+\begin{itemize}
+\item NIH R01 HG006448, Models and Methods for Population Genomics 
+\item NIH P50 GM071508, Center for Quantitative Biology 
+\end{itemize}
+\end{frame}
+
+\end{document}

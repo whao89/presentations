@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Wei Hao" />
+  <meta name="dcterms.date" content="2016-10-14" />
+  <title>Scaling models of genetic variation to millions of humans</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="terastructure_files/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="terastructure_files/reveal.js-3.3.0/css/theme/night.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'terastructure_files/reveal.js-3.3.0/css/print/pdf.css' : 'terastructure_files/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="terastructure_files/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Scaling models of genetic variation to millions of humans</h1>
+    <h2 class="author">Wei Hao</h2>
+    <h3 class="date">October 14, 2016</h3>
+</section>
+
+<section class="slide level2">
+
+<p>Single Nucleotide Polymorphism (SNP)</p>
+<center>
+<img src="snp.png" />
+</center>
+<aside class="notes">
+<p>DNA encodes genetic information</p>
+<p>humans share 99+ DNA yet exhibit a wide range of traits: height or disease suscep.</p>
+genetic <em>VARIATION</em>
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="family_tree.png" />
+</center>
+<aside class="notes">
+<p>Genetic information is inherited</p>
+<p>two copies of each chromosome</p>
+variants are passed between generations
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="globe_tgp.jpg" />
+</center>
+<p>Source: 1000 Genomes Project Consortium, <em>Nature</em> (2015)</p>
+<aside class="notes">
+<p>key takeaway: colored wedges represent proportion of genetic variation not shared by other locations</p>
+<p>distribution of genetic variation is affected by migration, environement, history also evo forced selection</p>
+modeling the dependence structure of genome wide variation is important to understanding how genetics works
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="data.png" />
+</center>
+<aside class="notes">
+<p>describe why 0 1 2</p>
+<p>describe rows and columns</p>
+describe scale
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="ancestral_pops.png" />
+</center>
+<aside class="notes">
+<p>we are interested in dependence between individuals</p>
+<p>assume there exists an abstract ancestral pop.</p>
+discrete number of pops
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="admixture.png" />
+</center>
+<aside class="notes">
+<p>proportions sum to 1</p>
+<p>multi colored vertical bars are people</p>
+how does this affect SNPs?
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="markers.png" />
+</center>
+<aside class="notes">
+<p>each ancestral pop has a frequency of seeing a particular variant</p>
+<p>rows are SNPs</p>
+weighted sums
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="model.png" />
+</center>
+<aside class="notes">
+<p>puts together as BAYESIAN MODEL</p>
+<p>walk through the arrows starting from (i,j)</p>
+<p>POPULATION STRUCTURE b/w individuals</p>
+how the structured is manifested on a SNP by SNp basis
+</aside>
+</section>
+<section class="slide level2">
+
+<p><img src="PSD.PNG" /></p>
+<p><img src="ADX.PNG" /></p>
+<p><img src="FS.PNG" /></p>
+<aside class="notes">
+<p>Mention methods/scale</p>
+Comparisons with ADX and FS
+</aside>
+</section>
+<section class="slide level2">
+
+<p>23andMe: 450K+ individuals</p>
+<center>
+<img src="23andMe.PNG" />
+</center>
+<aside class="notes">
+<p>pop struct is confounder</p>
+<p>existing methods can’t fit at this scale</p>
+“european descent” is in part concession to that fact
+</aside>
+</section>
+<section id="terastructure" class="slide level2">
+<h1>TeraStructure</h1>
+<center>
+<img src="Figure1.png" />
+</center>
+<p>Stochastic variational inference (Hoffman et al 2013)</p>
+<aside class="notes">
+<p>name; method</p>
+<p>local v global</p>
+big adv is don’t care about number of SNPs; don’t even need data in RAM
+</aside>
+</section>
+<section id="genomes-k7" class="slide level2">
+<h1>1000 Genomes K=7</h1>
+<center>
+<img src="TGP_7.png" />
+</center>
+<aside class="notes">
+<p>explain <strong>indvs</strong> and <strong>geo</strong> and <strong>ancestral pops</strong> and <strong>k</strong></p>
+to interpret this kind of figure…
+</aside>
+</section>
+<section id="genomes-k8" class="slide level2">
+<h1>1000 Genomes K=8</h1>
+<center>
+<img src="TGP_8.png" />
+</center>
+<aside class="notes">
+<p><strong>increased K</strong></p>
+gain resolution in south/central AM
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="high_k.png" />
+</center>
+<aside class="notes">
+<p>we also ran a few simulations</p>
+<p>this is a “hard simulation”</p>
+<p>introduce <strong>ORACLE</strong></p>
+K=10, 1M by 10K
+</aside>
+</section>
+<section class="slide level2">
+
+<center>
+<img src="Figure2_awkward_resize.png" />
+</center>
+<aside class="notes">
+<p>This demonstrates scalability</p>
+K=6, 1M SNPs
+</aside>
+</section>
+<section class="slide level2">
+
+<p>Many more details in our preprint: <a href="http://biorxiv.org/content/early/2015/05/28/013227" class="uri">http://biorxiv.org/content/early/2015/05/28/013227</a></p>
+<aside class="notes">
+<p>to summarize briefly, we devel-ed a method, terastructure, to infer population structure in large scale genetic datasets of up to 1M.</p>
+</aside>
+</section>
+<section id="acknowledgments" class="slide level2">
+<h1>Acknowledgments</h1>
+<p>Co-authors:</p>
+<ul>
+<li>Prem Gopalan</li>
+<li>David M. Blei</li>
+<li>John D. Storey</li>
+</ul>
+<p>Funding:</p>
+<ul>
+<li>NIH R01 HG006448</li>
+<li>NIH P50 GM071508</li>
+</ul>
+<aside class="notes">
+since this is a PICSciE research computing event, seems appropriate to thank the computers
+</aside>
+</section>
+<section id="a-very-special-thanks-to" class="slide level2">
+<h1>A very special thanks to</h1>
+<p>Our PICSciE administered machines:</p>
+<ul>
+<li><code>hex.princeton.edu</code></li>
+<li>The Muppets:
+<ul>
+<li><code>statler.princeton.edu</code></li>
+<li><code>waldorf.princeton.edu</code></li>
+</ul></li>
+</ul>
+<center>
+<img src="Statler_and_Waldorf.jpg" />
+</center>
+</section>
+    </div>
+  </div>
+
+  <script src="terastructure_files/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="terastructure_files/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'terastructure_files/reveal.js-3.3.0/plugin/notes/notes.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,274 @@
+---
+title: Scaling models of genetic variation to millions of humans
+author: Wei Hao
+date: October 14, 2016
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_plugins: ["notes"]
+    theme: night
+    transition: none
+    center: false
+    reveal_options:
+      progress: false
+      controls: false
+---
+
+----
+
+Single Nucleotide Polymorphism (SNP)
+
+<center>
+![](snp.png)
+</center>
+
+<aside class="notes">
+DNA encodes genetic information
+
+humans share 99+ DNA yet exhibit a wide range of traits: height or disease suscep.
+
+genetic *VARIATION*
+</aside>
+
+----
+
+<center>
+![](family_tree.png)
+</center>
+
+
+<aside class="notes">
+Genetic information is inherited 
+
+two copies of each chromosome
+
+variants are passed between generations
+</aside>
+
+----
+
+<center>
+![](globe_tgp.jpg)
+</center>
+
+Source: 1000 Genomes Project Consortium, _Nature_ (2015)
+
+<aside class="notes">
+key takeaway: colored wedges represent proportion of genetic variation not shared by other locations 
+
+distribution of genetic variation is affected by migration, environement, history
+also evo forced selection
+
+modeling the dependence structure of genome wide variation is important to understanding how genetics works
+</aside>
+
+
+----
+
+<center>
+![](data.png)
+</center>
+
+<aside class="notes">
+describe why 0 1 2
+
+describe rows and columns
+
+describe scale
+</aside>
+
+----
+
+<center>
+![](ancestral_pops.png)
+</center>
+
+<aside class="notes">
+we are interested in dependence between individuals
+
+assume there exists an abstract ancestral pop.
+
+discrete number of pops
+</aside>
+
+----
+
+<center>
+![](admixture.png)
+</center>
+
+<aside class="notes">
+proportions sum to 1
+
+multi colored vertical bars are people
+
+how does this affect SNPs?
+</aside>
+
+----
+
+<center>
+![](markers.png)
+</center>
+
+<aside class="notes">
+each ancestral pop has a frequency of seeing a particular variant
+
+rows are SNPs
+
+weighted sums
+</aside>
+
+----
+
+<center>
+![](model.png)
+</center>
+
+<aside class="notes">
+puts together as BAYESIAN MODEL
+
+walk through the arrows starting from (i,j)
+
+POPULATION STRUCTURE b/w individuals
+
+how the structured is manifested on a SNP by SNp basis
+</aside>
+
+----
+
+![](PSD.PNG)
+
+![](ADX.PNG)
+
+![](FS.PNG)
+
+
+<aside class="notes">
+Mention methods/scale
+
+Comparisons with ADX and FS
+</aside>
+
+----
+
+23andMe: 450K+ individuals
+
+<center>
+![](23andMe.PNG)
+</center>
+
+<aside class="notes">
+pop struct is confounder
+
+existing methods can't fit at this scale
+
+"european descent" is in part concession to that fact
+</aside>
+
+## TeraStructure
+
+<center>
+![](Figure1.png)
+</center>
+
+Stochastic variational inference (Hoffman et al 2013)
+
+<aside class="notes">
+name; method
+
+local v global
+
+big adv is don't care about number of SNPs; don't even need data in RAM
+</aside>
+
+## 1000 Genomes K=7
+
+<center>
+![](TGP_7.png)
+</center>
+
+<aside class="notes">
+explain **indvs** and **geo** and **ancestral pops** and **k**
+
+to interpret this kind of figure...
+</aside>
+
+## 1000 Genomes K=8
+
+<center>
+![](TGP_8.png)
+</center>
+
+<aside class="notes">
+**increased K**
+
+gain resolution in south/central AM
+</aside>
+
+----
+
+<center>
+![](high_k.png)
+</center>
+
+<aside class="notes">
+we also ran a few simulations
+
+this is a "hard simulation" 
+
+introduce **ORACLE**
+
+K=10, 1M by 10K
+</aside>
+
+----
+
+<center>
+![](Figure2_awkward_resize.png)
+</center>
+
+<aside class="notes">
+This demonstrates scalability
+
+K=6, 1M SNPs
+</aside>
+
+----
+
+Many more details in our preprint: http://biorxiv.org/content/early/2015/05/28/013227
+
+<aside class="notes">
+to summarize briefly, we devel-ed a method, terastructure, to infer population structure in large scale genetic datasets of up to 1M. 
+
+</aside>
+
+## Acknowledgments 
+
+Co-authors:
+
+- Prem Gopalan
+- David M. Blei
+- John D. Storey
+
+Funding:
+
+- NIH R01 HG006448
+- NIH P50 GM071508
+
+<aside class="notes">
+since this is a PICSciE research computing event, seems appropriate to thank the computers
+</aside>
+
+## A very special thanks to 
+
+Our PICSciE administered machines:
+
+- `hex.princeton.edu`
+- The Muppets: 
+    - `statler.princeton.edu`
+    - `waldorf.princeton.edu`
+
+<center>
+![](Statler_and_Waldorf.jpg)
+</center>

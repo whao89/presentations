@@ -1,0 +1,187 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{bm}
+\usetikzlibrary{matrix,calc}
+\usetikzlibrary{arrows,positioning,decorations.pathreplacing} 
+
+%helvetica
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    % Define arrow style
+    tip/.style={
+           ->,
+           thin,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%dotted line stuff
+\tikzset{%
+  dots/.style args={#1per #2}{%
+    line cap=round,
+    dash pattern=on 0 off #2/#1
+  }
+}
+
+
+\begin{document}
+
+\tikzstyle{tall1}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=7cm,text width=0.25cm]%
+
+\tikzstyle{snp1}=[rectangle, 
+        minimum width=0.75cm, minimum
+        height=0.75cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp2}=[rectangle, 
+        minimum width=0.75cm, minimum
+        height=0.75cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp3}=[rectangle, 
+        minimum width=0.75cm, minimum
+        height=0.75cm, inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp4}=[rectangle, 
+        minimum width=0.75cm, minimum
+        height=0.75cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp5}=[rectangle, 
+        minimum width=0.75cm, minimum
+        height=0.75cm,inner sep=0pt,outer sep=0pt]%
+
+\tikzstyle{p1}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=1cm,text width=0.25cm]%
+\tikzstyle{p2}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=2cm,text width=0.25cm]%
+\tikzstyle{p3}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=3cm,text width=0.25cm]%
+\tikzstyle{p4}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=0.5cm,text width=0.25cm]%
+\tikzstyle{p5}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=0.5cm,text width=0.25cm]%
+
+\tikzstyle{q1}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=0.5cm,text width=0.25cm]%
+\tikzstyle{q2}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=1cm,text width=0.25cm]%
+\tikzstyle{q3}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=1cm,text width=0.25cm]%
+\tikzstyle{q4}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=2cm,text width=0.25cm]%
+\tikzstyle{q5}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=2.5cm,text width=0.25cm]%
+
+\tikzstyle{r1}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=2cm,text width=0.25cm]%
+\tikzstyle{r2}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=1.75cm,text width=0.25cm]%
+\tikzstyle{r3}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=2cm,text width=0.25cm]%
+\tikzstyle{r4}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=0.25cm,text width=0.25cm]%
+\tikzstyle{r5}=[rectangle, 
+        minimum width=0.25cm, text centered, minimum
+        height=1cm,text width=0.25cm]%
+\begin{tikzpicture}[node distance=1cm, auto,]
+
+\definecolor{c1}{HTML}{E41A1C}%
+\definecolor{c2}{HTML}{377EB8}%
+\definecolor{c3}{HTML}{4dAF4A}%
+\definecolor{c4}{HTML}{984EA3}%
+\definecolor{c5}{HTML}{FF7F00}%
+
+%anchor
+\node[draw=none,fill=none](anchor){};
+
+%admixed person 1
+\node[p1,fill=c1,below=0 of anchor](pp1){};
+\node[p2,fill=c2,below=-0.4pt of pp1](pp2){};
+\node[p3,fill=c3,below=-0.4pt of pp2](pp3){};
+\node[p4,fill=c4,below=-0.4pt of pp3](pp4){};
+\node[p5,fill=c5,below=-0.4pt of pp4](pp5){};
+
+%admixed person 2
+\node[q1,fill=c1,left=0.5cm of pp1.north west,anchor=north east](qq1){};
+\node[q2,fill=c2,below=-0.4pt of qq1](qq2){};
+\node[q3,fill=c3,below=-0.4pt of qq2](qq3){};
+\node[q4,fill=c4,below=-0.4pt of qq3](qq4){};
+\node[q5,fill=c5,below=-0.4pt of qq4](qq5){};
+
+%admixed person 3
+\node[r1,fill=c1,left=0.5cm of qq1.north west,anchor=north east](rr1){};
+\node[r2,fill=c2,below=-0.4pt of rr1](rr2){};
+\node[r3,fill=c3,below=-0.4pt of rr2](rr3){};
+\node[r4,fill=c4,below=-0.4pt of rr3](rr4){};
+\node[r5,fill=c5,below=-0.4pt of rr4](rr5){};
+
+\node[draw=none,fill=none,above=0.05cm of qq1](text){\large Individuals\vphantom{pp}};
+
+%draw right anchors
+\node[draw=none,fill=none,right=6cm of anchor](anchor2){};
+
+%draw pop 3 individuals
+
+{\footnotesize
+
+\node[snp3,fill=c3,below=0cm of anchor2,text=white](a3){0.05};
+\node[snp3,fill=c3,below=1.5cm of anchor2,text=white](b3){0.34};
+\node[snp3,fill=c3,below=3cm of anchor2,text=white](c3){0.33};
+\node[snp3,fill=c3,below=4.5cm of anchor2,text=white](d3){0.11};
+\node[snp3,fill=c3,below=6cm of anchor2,text=white](e3){0.65};
+
+\node[snp2,fill=c2,left=-0.4pt of a3,text=white](a2){0.17};
+\node[snp2,fill=c2,left=-0.4pt of b3,text=white](b2){0.52};
+\node[snp2,fill=c2,left=-0.4pt of c3,text=white](c2){0.28};
+\node[snp2,fill=c2,left=-0.4pt of d3,text=white](d2){0.23};
+\node[snp2,fill=c2,left=-0.4pt of e3,text=white](e2){0.20};
+
+\node[snp1,fill=c1,left=-0.4pt of a2,text=white](a1){0.09};
+\node[snp1,fill=c1,left=-0.4pt of b2,text=white](b1){0.55};
+\node[snp1,fill=c1,left=-0.4pt of c2,text=white](c1){0.81};
+\node[snp1,fill=c1,left=-0.4pt of d2,text=white](d1){0.02};
+\node[snp1,fill=c1,left=-0.4pt of e2,text=white](e1){0.14};
+
+\node[snp4,fill=c4,right=-0.4pt of a3,text=white](a4){0.22};
+\node[snp4,fill=c4,right=-0.4pt of b3,text=white](b4){0.21};
+\node[snp4,fill=c4,right=-0.4pt of c3,text=white](c4){0.12};
+\node[snp4,fill=c4,right=-0.4pt of d3,text=white](d4){0.33};
+\node[snp4,fill=c4,right=-0.4pt of e3,text=white](e4){0.45};
+
+\node[snp5,fill=c5,right=-0.4pt of a4,text=white](a5){0.34};
+\node[snp5,fill=c5,right=-0.4pt of b4,text=white](b5){0.30};
+\node[snp5,fill=c5,right=-0.4pt of c4,text=white](c5){0.09};
+\node[snp5,fill=c5,right=-0.4pt of d4,text=white](d5){0.56};
+\node[snp5,fill=c5,right=-0.4pt of e4,text=white](e5){0.40};
+}
+
+\node[draw=none,fill=none,above=0.05cm of a3](text){\large SNPs\vphantom{pp}};
+
+% draw the arrow
+\node[draw=none,fill=none,below=3.25cm of anchor](start){};
+\node[draw=none,fill=none,below=3.25cm of anchor2](end){};
+
+\draw [->,shorten >= 0.125cm, shorten <= 0.25cm] (start) -- ($ (start)!0.7!(end)$ );
+%\draw (rr5) grid [step=0.5cm](a5);
+
+\end{tikzpicture}
+
+
+\end{document} 

@@ -1,0 +1,70 @@
+\documentclass{standalone}
+\usepackage{tabularx}
+\usepackage{forest}
+\usetikzlibrary{shapes.geometric}
+
+%based on http://tex.stackexchange.com/a/176649
+
+%helvetica
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+\definecolor{color2}{HTML}{FDAE6B}
+\definecolor{color3}{HTML}{E6550D}
+\definecolor{color1}{HTML}{FEE6CE}
+
+\begin{document}
+{
+\Large
+
+\begin{forest}
+delay={
+  for tree={
+    edge path={
+      \noexpand\path[\forestoption{edge}]
+        ([xshift=-(6pt-1pt*level)].child anchor) to[out=180,in=0]
+        ([xshift=(6pt-1pt*level)]!u.parent anchor)\forestoption{edge label};
+    },
+    if n=1
+      {fill=color1}
+      {if n'=1
+        {fill=color3}
+        {}
+      }
+  }
+},
+for tree={
+  line width=3pt,
+  inner sep=8pt,
+  draw=gray!40,
+  minimum size=1cm,
+  text width=3cm,
+  child anchor=west,
+  parent anchor=east,
+  grow=east,
+  l sep=2cm,
+  s sep=10pt,
+  draw,
+  anchor=west,
+  edge={line width=(18pt-3pt*level),line cap=rect,color=gray!40},
+}
+[You!,fill=color2
+  [Mother
+   [Grandmother
+   ]
+   [Grandfather
+   ]
+  ]
+  [Father
+    [Grandmother
+    ]
+    [Grandfather
+    ]
+  ]
+]
+\end{forest}
+
+}
+
+\end{document}

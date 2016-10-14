@@ -1,0 +1,139 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{bm}
+\usetikzlibrary{matrix,fit}
+\usetikzlibrary{arrows,positioning,decorations.pathreplacing} 
+
+%helvetica
+%\usepackage{sansmathfonts}
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    % Define arrow style
+    tip/.style={
+           ->,
+           thin,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%dotted line stuff
+\tikzset{%
+  dots/.style args={#1per #2}{%
+    line cap=round,
+    dash pattern=on 0 off #2/#1
+  }
+}
+
+
+\begin{document}
+
+\definecolor{c1}{HTML}{E41A1C}%
+\definecolor{c2}{HTML}{377EB8}%
+\definecolor{c3}{HTML}{4dAF4A}%
+\definecolor{c4}{HTML}{984EA3}%
+\definecolor{c5}{HTML}{FF7F00}%
+
+\tikzstyle{full}=[rectangle, draw, 
+        minimum width=2cm, minimum
+        height=3cm,text width=2cm]%
+\tikzstyle{tall1}=[rectangle, draw, 
+        minimum width=1cm, text centered, minimum
+        height=6cm,text width=1cm]%
+\tikzstyle{wide1}=[rectangle, draw, 
+        minimum width=2.25cm, text centered, minimum
+        height=0.8cm,text width=2.25cm]%
+
+\tikzstyle{snp1}=[rectangle, 
+        minimum width=0.5cm, minimum
+        height=0.5cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp2}=[rectangle, 
+        minimum width=0.5cm, minimum
+        height=0.5cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp3}=[rectangle, 
+        minimum width=0.5cm, minimum
+        height=0.5cm, inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp4}=[rectangle, 
+        minimum width=0.5cm, minimum
+        height=0.5cm,inner sep=0pt,outer sep=0pt]%
+\tikzstyle{snp5}=[rectangle, 
+        minimum width=0.5cm, minimum
+        height=0.5cm,inner sep=0pt,outer sep=0pt]%
+
+\tikzstyle{p1}=[rectangle, 
+        minimum width=0.0625cm, text centered, minimum
+        height=0.25cm,text width=0.0625cm]%
+\tikzstyle{p2}=[rectangle, 
+        minimum width=0.0625cm, text centered, minimum
+        height=0.5cm,text width=0.0625cm]%
+\tikzstyle{p3}=[rectangle, 
+        minimum width=0.0625cm, text centered, minimum
+        height=0.75cm,text width=0.0625cm]%
+\tikzstyle{p4}=[rectangle, 
+        minimum width=0.0625cm, text centered, minimum
+        height=0.125cm,text width=0.0625cm]%
+\tikzstyle{p5}=[rectangle, 
+        minimum width=0.0625cm, text centered, minimum
+        height=0.125cm,text width=0.0625cm]%
+
+
+\begin{tikzpicture}[node distance=1cm, auto,]
+
+%start entire figure from Y matrix
+\matrix [draw=black,fill=Orchid!60,matrix of math nodes] (M)
+ { 1 & 0 & 2 & 0 \\
+  2 & 1 & 1 & 2 \\
+  2 & 1 & 2 & 1 \\
+  0 & 1 & 0 & 1 \\
+	1 & 0 & 1 & 2 \\
+	0 & 2 & 1 & 0 \\
+	1 & 0 & 0 & 0 \\
+};
+
+% label Y
+\node[draw=none,fill=none,left=0.05cm of M](Ytext1){\rotatebox{90}{ SNPs}};
+\node[draw=none,fill=none,above=0.05cm of M](Ytext2){ Individuals};
+
+% highlight matrix element
+\node[draw=blue,inner sep=0pt, thick, rounded corners, 
+		fit=(M-5-4.north west)(M-5-4.north east)(M-5-4.south west)(M-5-4.south east)](box){};
+
+% binomial statement
+\node[draw=none,fill=none,right=2cm of box](binomial){\Large $ \text{Binomial} \left( \text{2,} \right. $ \hspace*{-8pt} };
+\node[draw=blue,fill=none,thick,rounded corners,right=0pt of binomial.east,anchor=west](beta){\Large $ \bm{\beta}_i  $ };
+\node[draw=none,fill=none,right=0pt of beta.east,anchor=west](dot){\Large \hspace*{-5pt} $\cdot$ \hspace*{-5pt}};
+\node[draw=blue,fill=none,thick,rounded corners,right=0pt of dot.east,anchor=west](theta){\Large $ \bm{\theta}_j $};
+\node[draw=none,fill=none,right=0pt of theta.east,anchor=west](paren){\Large $ \hspace*{-4pt}\left. \right) $};
+\draw[->,thick,draw=blue] (box.east) -- node{$(i,j)$}(binomial.west);
+
+%admixed individuals
+\node[p1,fill=c1,above=3cm of beta](pp1){};
+\node[p2,fill=c2,below=-0.4pt of pp1](pp2){};
+\node[p3,fill=c3,below=-0.4pt of pp2](pp3){};
+\node[p4,fill=c4,below=-0.4pt of pp3](pp4){};
+\node[p5,fill=c5,below=-0.4pt of pp4](pp5){};
+\node[fill=none,draw=none,above=0.05cm of pp1](adx){Admixture proportions};
+\draw[->,thick,draw=blue,rounded corners,shorten >= 2pt] (theta.north) |- (pp3.45);
+
+
+%snp parameters
+\node[snp3,fill=c3,below=1cm of beta,text=white](a3){\tiny 0.05};
+\node[snp2,fill=c2,left=-0.4pt of a3,text=white](a2){\tiny 0.17};
+\node[snp1,fill=c1,left=-0.4pt of a2,text=white](a1){\tiny 0.09};
+\node[snp4,fill=c4,right=-0.4pt of a3,text=white](a4){\tiny 0.22};
+\node[snp5,fill=c5,right=-0.4pt of a4,text=white](a5){\tiny 0.34};
+\node[fill=none,draw=none,below=0.05cm of a3](snpss){SNP-specific probabilities};
+\draw[->,thick,draw=blue,shorten >= 2pt] (beta.south) -- (a3.north);
+
+
+
+\end{tikzpicture}
+
+
+\end{document} 

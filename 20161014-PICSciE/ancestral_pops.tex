@@ -1,0 +1,81 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{bm}
+\usetikzlibrary{matrix}
+\usetikzlibrary{arrows,positioning,decorations.pathreplacing} 
+
+%helvetica
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    % Define arrow style
+    tip/.style={
+           ->,
+           thin,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%dotted line stuff
+\tikzset{%
+  dots/.style args={#1per #2}{%
+    line cap=round,
+    dash pattern=on 0 off #2/#1
+  }
+}
+
+
+\begin{document}
+
+
+\tikzstyle{full}=[rectangle,  
+        minimum width=2.25cm, text centered, minimum
+        height=6cm,text width=2.25cm]%
+
+\tikzstyle{tall1}=[rectangle,  
+        minimum width=0.25cm, text centered, minimum
+        height=7cm,text width=0.25cm]%
+				
+\tikzstyle{wide1}=[rectangle,  
+        minimum width=2.25cm, text centered, minimum
+        height=0.8cm,text width=2.25cm]%
+
+\begin{tikzpicture}[node distance=1cm, auto,]
+
+%#e41a1c
+%#377eb8
+%#4daf4a
+%#984ea3
+%#ff7f00
+
+\definecolor{c1}{HTML}{E41A1C}%
+\definecolor{c2}{HTML}{377EB8}%
+\definecolor{c3}{HTML}{4dAF4A}%
+\definecolor{c4}{HTML}{984EA3}%
+\definecolor{c5}{HTML}{FF7F00}%
+
+
+%draw ancestral populations
+\node[tall1,fill=c1](A1){};
+\node[tall1,fill=c2,right=0.5cm of A1](A2){};
+\node[tall1,fill=c3,right=0.5cm of A2](A3){};
+\node[tall1,fill=c4,right=0.5cm of A3](A4){};
+\node[tall1,fill=c5,right=0.5cm of A4](A5){};
+
+%label Y
+\node[draw=none,fill=none,above=0.05cm of A3](text){\large Ancestral Populations};
+
+
+%space filler
+\node[tall1,draw=none,fill=none,right=6cm of A5](empty){};
+
+\end{tikzpicture}
+
+
+\end{document} 
